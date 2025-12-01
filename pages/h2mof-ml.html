@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H2MOF-ML Dataset - MOF DB</title>
+    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div data-include="header"></div>
+
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <a href="../index.html#datasets">Datasets</a>
+        <span>/</span>
+        <span>H2MOF-ML Dataset</span>
+    </div>
+
+    <div class="container">
+        <div class="content-section">
+            <!-- Header Section -->
+            <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                <div style="font-size: 4rem;">💧</div>
+                <div>
+                    <h1 style="margin: 0;">H2MOF-ML Dataset</h1>
+                    <p style="margin: 0.5rem 0 0 0; color: #666;">Version v1.0 | ML-Ready Dataset for Hydrogen Storage Prediction</p>
+                </div>
+            </div>
+
+            <!-- Overview Box -->
+            <div class="info-box">
+                <h4>📊 Dataset Overview</h4>
+                <p>A comprehensive, machine learning-ready dataset of 4,034 experimentally synthesised MOF materials, including rich structural features and four hydrogen adsorption capacity metrics derived from Grand Canonical Monte Carlo (GCMC) simulations. This dataset enables direct training and inference for hydrogen storage performance prediction tasks.</p>
+            </div>
+
+            <!-- Key Statistics -->
+            <h2>Key Statistics</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+                <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: bold; color: #667eea;">4,034</div>
+                    <div style="color: #666; margin-top: 0.5rem;">MOF Structures</div>
+                </div>
+                <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: bold; color: #667eea;">4</div>
+                    <div style="color: #666; margin-top: 0.5rem;">GCMC Target Values</div>
+                </div>
+                <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: bold; color: #667eea;">100%</div>
+                    <div style="color: #666; margin-top: 0.5rem;">Traceable (CSD)</div>
+                </div>
+                <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: bold; color: #667eea;">JSON</div>
+                    <div style="color: #666; margin-top: 0.5rem;">ML-Ready Format</div>
+                </div>
+            </div>
+
+            <!-- Data Sources Section -->
+            <h2>📊 Data Sources</h2>
+            
+            <h3>🧱 Structural Data</h3>
+            <p><span>From </span><a href="https://www.ccdc.cam.ac.uk/support-and-resources/downloads/" target="_blank">CSD MOF Collection (Non-Commercial)</a><span> containing experimentally synthesised MOF CIF data.</span></p>
+            
+            <h3>🔬 Adsorption Performance & Geometric Features</h3>
+            <p><span>From </span><a href="https://datahub.hymarc.org/dataset/computational-prediction-of-hydrogen-storage-capacities-in-mofs" target="_blank">HyMARC Datahub</a><span> (Ahmed et al., 2017) including:</span></p>
+            <ul>
+                <li><strong>Four GCMC hydrogen adsorption capacity metrics:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li><code>UG_at_PS</code><span> — Usable Gravimetric capacity at 77 K (100 → 5 bar) in wt.%</span></li>
+                        <li><code>UV_at_PS</code><span> — Usable Volumetric capacity at 77 K (100 → 5 bar) in g H₂/L</span></li>
+                        <li><code>UG_at_TPS</code><span> — Usable Gravimetric capacity (100 bar/77 K → 5 bar/160 K) in wt.%</span></li>
+                        <li><code>UV_at_TPS</code><span> — Usable Volumetric capacity (100 bar/77 K → 5 bar/160 K) in g H₂/L</span></li>
+                    </ul>
+                </li>
+                <li style="margin-top: 0.5rem;"><strong>Original geometric features:</strong><span> GSA (Gravimetric Surface Area), VSA (Volumetric Surface Area), VF (Void Fraction), LCD (Largest Cavity Diameter), PLD (Pore Limiting Diameter)</span></li>
+            </ul>
+
+            <!-- Processing Pipeline Section -->
+            <h2>🔧 Data Processing Pipeline</h2>
+            <p>We performed extensive processing to transform raw data into a ML-ready format:</p>
+            
+            <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid #667eea;">
+                <h4 style="margin: 0 0 0.75rem 0; color: #333;">⭐ <span>1. Data Filtering & Cleaning</span></h4>
+                <p style="margin: 0; line-height: 1.6;">Retained only MOFs with CSD codes (4,034 samples) to ensure data traceability and structure reproducibility.</p>
+            </div>
+
+            <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid #667eea;">
+                <h4 style="margin: 0 0 0.75rem 0; color: #333;">⭐ <span>2. Automated Structure Data Extraction</span></h4>
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8;">
+                    <li>Developed Pymatgen-based Python automation scripts</li>
+                    <li>Automatic CIF retrieval via CCDC API</li>
+                    <li>Parsed and extracted: unit cell parameters (a, b, c, α, β, γ), atomic types and coordinates, crystal bonding information</li>
+                </ul>
+            </div>
+
+            <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid #667eea;">
+                <h4 style="margin: 0 0 0.75rem 0; color: #333;">⭐ <span>3. Derived Feature Calculation</span></h4>
+                <p style="margin: 0 0 0.5rem 0; line-height: 1.6;">Computed additional features to enrich the feature space:</p>
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8;">
+                    <li>Total metal atom count</li>
+                    <li>Metal mass fraction</li>
+                    <li>Metal molar fraction</li>
+                    <li>Lattice volume</li>
+                </ul>
+            </div>
+
+            <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid #667eea;">
+                <h4 style="margin: 0 0 0.75rem 0; color: #333;">⭐ <span>4. Data Integration & Standardization</span></h4>
+                <p style="margin: 0 0 0.5rem 0; line-height: 1.6;">Unified JSON database containing:</p>
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8;">
+                    <li>Atomic composition features</li>
+                    <li>Lattice parameter features</li>
+                    <li>Pore geometry features</li>
+                    <li>Crystal bonding information</li>
+                    <li>GCMC performance labels</li>
+                </ul>
+            </div>
+
+            <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid #667eea;">
+                <h4 style="margin: 0 0 0.75rem 0; color: #333;">⭐ <span>5. Quality Control</span></h4>
+                <p style="margin: 0; line-height: 1.6;">Missing value handling with default values to ensure training stability.</p>
+            </div>
+
+            <p style="margin-top: 1.5rem;"><span>For a complete list of all accessible attributes and their descriptions, please refer to the </span><a href="data-format.html">Data Format</a><span> documentation.</span></p>
+
+            <!-- Applications Section -->
+            <h2>🎯 Applications</h2>
+            <ul>
+                <li><strong>Machine Learning Model Training:</strong><span> Direct use for training various ML models for hydrogen storage prediction</span></li>
+                <li><strong>Performance Prediction:</strong><span> Predict hydrogen storage capacities under different operating conditions</span></li>
+                <li><strong>High-Throughput Screening:</strong><span> Identify promising MOF candidates for hydrogen storage applications</span></li>
+                <li><strong>Structure-Property Relationships:</strong><span> Study correlations between MOF structure and hydrogen storage performance</span></li>
+            </ul>
+
+            <!-- Key Advantages Section -->
+            <h2>💡 Key Advantages</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div style="background: #d4edda; padding: 1rem; border-radius: 8px; border-left: 4px solid #28a745;">
+                    <strong>✅ ML-Ready</strong>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Structured JSON format with comprehensive features, ready for direct model training</p>
+                </div>
+                <div style="background: #cce5ff; padding: 1rem; border-radius: 8px; border-left: 4px solid #007bff;">
+                    <strong>📊 Feature-Rich</strong>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Multi-dimensional feature space: structural + geometric + performance</p>
+                </div>
+                <div style="background: #f8d7da; padding: 1rem; border-radius: 8px; border-left: 4px solid #dc3545;">
+                    <strong>🔍 Traceable</strong>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Preserved CSD codes for reliable data provenance</p>
+                </div>
+                <div style="background: #e7e7ff; padding: 1rem; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <strong>🎯 Ready-to-Use</strong>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Unified format with comprehensive feature engineering</p>
+                </div>
+            </div>
+
+            <!-- Download Section -->
+            <h2>Download</h2>
+            <p>The dataset is available in JSON format. You can download it via:</p>
+            <ul>
+                <li>
+                    <span>Browser: Visit the </span>
+                    <a href="https://huggingface.co/datasets/ytbai/H2MOF-ML/blob/main/H2MOF-ML.json" target="_blank">Hugging Face dataset page</a>
+                </li>
+                <li>
+                    <span>Python: Use the download script from </span>
+                    <a href="quick-start.html">Quick Start guide</a>
+                </li>
+            </ul>
+
+            <!-- Citation Section -->
+            <h2>📚 Citation</h2>
+            <p>If you use this dataset, please cite both the original data sources:</p>
+            
+            <div class="info-box" style="margin-top: 1rem;">
+                <h4>Hydrogen Adsorption Data</h4>
+                <p style="margin: 0; font-family: 'Times New Roman', serif; line-height: 1.6;">
+                    Ahmed, A., Liu, Y., Purewal, J., Tran, L., Sholl, D. S., & Lively, R. P.<br>
+                    <em>High-throughput screening of metal–organic frameworks for hydrogen storage at cryogenic temperature.</em><br>
+                    <span>Energy & Environmental Science</span><span>, 2017, 10, 2459–2471.</span>
+                </p>
+            </div>
+            
+            <div class="info-box" style="margin-top: 1rem;">
+                <h4>Structural Data</h4>
+                <p style="margin: 0;"><span>From </span><a href="https://www.ccdc.cam.ac.uk/support-and-resources/downloads/" target="_blank">CSD MOF Collection (Non-Commercial)</a><span>, licensed under </span><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></p>
+            </div>
+
+            <!-- License Section -->
+            <h2>📄 License</h2>
+            <p><span>This modified dataset is licensed under the </span><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)</a><span>.</span></p>
+
+            <h3>License Terms</h3>
+            <ul>
+                <li><strong>Attribution (BY)</strong><span>: Please cite the original sources listed above.</span></li>
+                <li><strong>Non-Commercial (NC)</strong><span>: Use is restricted to non-commercial research purposes only.</span></li>
+                <li><strong>ShareAlike (SA)</strong><span>: Any modifications must be shared under the same license.</span></li>
+            </ul>
+
+            <!-- Related Documentation -->
+            <div class="info-box" style="margin-top: 2rem;">
+                <h4>📚 Related Documentation</h4>
+                <ul style="margin: 0.5rem 0 0 0;">
+                    <li><a href="quick-start.html">Quick Start Guide - Learn how to load and use the dataset</a></li>
+                    <li><a href="data-format.html">Data Format Specification - Complete attribute reference</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div data-include="footer"></div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

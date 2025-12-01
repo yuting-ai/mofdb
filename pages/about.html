@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About MOF DB</title>
+    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div data-include="header"></div>
+
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <span>About MOF DB</span>
+    </div>
+
+    <div class="container">
+        <div class="content-section">
+            <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                <img src="../logo.png" alt="MOF DB" style="height: 3.5rem; width: auto; object-fit: contain;">
+                <div>
+                    <h1>About MOF DB</h1>
+                    <p style="margin: 0.3rem 0 0; color: #666;">Machine learning-ready resources for Metal-Organic Framework discovery</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>Our Mission</h4>
+                <p>
+                    MOF DB speeds up research on metal–organic frameworks by offering well-organized, simulation-ready datasets along with clear, practical documentation. Our goal is to support reproducible workflows, make rapid prototyping easier, and enable large-scale screening of materials for gas storage and separation.                </p>
+            </div>
+
+            <h2>🔧 Our Approach</h2>
+            <p>
+                To create machine learning-ready datasets for materials property prediction, we start from multiple trusted data sources and employ an automated processing pipeline:
+            </p>
+            <div style="background: #f8f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-left: 4px solid #667eea;">
+                <p style="margin: 0; line-height: 1.8; font-size: 1.05rem;">
+                    We use automated scripts to extract structural information from CIF files, compute derived features to enrich the feature space, integrate multi-source data into unified formats, and convert everything into standardized JSON structures compatible with various machine learning models.
+                </p>
+            </div>
+
+            <h2>What You'll Find</h2>
+            <ul>
+                <li>
+                    Curated datasets designed for machine learning, such as the H2MOF-ML Dataset and the large-scale hMOF-ML Dataset.
+                </li>
+                <li>
+                    Detailed documentation, including Quick Start and Data Format guidance, to get you productive quickly.
+                </li>
+                <li>
+                    Download options for both browser-based access and scripted Hugging Face retrieval, ensuring flexible workflows.
+                </li>
+                <li>
+                    Helper scripts (e.g., explore.py) and consistent JSON formats so you can load samples via dot notation and integrate them into your ML pipelines.
+                </li>
+            </ul>
+
+            <h2>Dataset Highlights</h2>
+            <div class="two-column">
+                <div class="feature-card">
+                    <h4>H2MOF-ML Dataset</h4>
+                    <p>
+                        4,034 experimentally synthesised MOFs paired with Grand Canonical Monte Carlo hydrogen adsorption simulations, enabling direct training of adsorption predictors.
+                    </p>
+                    <div style="background: #e7f3ff; padding: 0.5rem; border-radius: 4px; margin: 0.75rem 0; font-size: 0.9rem;">
+                        <strong>🎯 For Model Training:</strong> Contains labeled GCMC data for training ML models
+                    </div>
+                    <a href="h2mof-ml.html" class="btn btn-secondary">Explore Dataset</a>
+                </div>
+                <div class="feature-card">
+                    <h4>hMOF-ML Dataset</h4>
+                    <p>
+                        137,953 hypothetical structures assembled from 102 building blocks with geometric descriptors, pore properties, and metal composition metadata for high-throughput screening.
+                    </p>
+                    <div style="background: #fff3cd; padding: 0.5rem; border-radius: 4px; margin: 0.75rem 0; font-size: 0.9rem;">
+                        <strong>🎯 For Prediction:</strong> Use trained models to predict properties on large-scale structures
+                    </div>
+                    <a href="dataset-hmof.html" class="btn btn-secondary">Explore Dataset</a>
+                </div>
+            </div>
+
+            <div class="info-box" style="background: #f0f7ff; border-left: 4px solid #667eea; margin-top: 2rem;">
+                <h4>🔄 Typical Workflow</h4>
+                <p style="margin: 0.5rem 0;">
+                    <strong>Step 1:</strong> Train your ML model using the <strong>H2MOF-ML Dataset</strong> (contains labeled GCMC simulation data for 4,034 experimental MOFs)
+                </p>
+                <p style="margin: 0.5rem 0;">
+                    <strong>Step 2:</strong> Apply the trained model to the <strong>hMOF-ML Dataset</strong> to predict hydrogen storage properties for 137,953 hypothetical MOF structures
+                </p>
+                <p style="margin: 0.5rem 0 0;">
+                    This workflow enables efficient discovery of promising MOF candidates through large-scale computational screening.
+                </p>
+            </div>
+
+            <div class="info-box">
+                <h4>License & Usage</h4>
+                <p>
+                    When using or redistributing these datasets, please refer to the original data source citations provided on each dataset page and comply with their respective licensing terms.
+                </p>
+            </div>
+
+            <div class="info-box">
+                <h4>Contact</h4>
+                <p>
+                    For questions or collaborations, email us at <a href="mailto:mofdb@outlook.com">mofdb@outlook.com</a>.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div data-include="footer"></div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
+

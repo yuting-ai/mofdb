@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Start - MOF DB</title>
+    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* Enhanced code block styles */
+        .code-section {
+            position: relative;
+            margin: 1.5rem 0;
+        }
+
+        .code-label {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 6px 6px 0 0;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: -1px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .enhanced-code-block {
+            position: relative;
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .enhanced-code-block pre {
+            margin: 0;
+        }
+
+        .enhanced-code-block code {
+            display: block;
+        }
+
+        .copy-btn-enhanced {
+            position: absolute;
+            top: 0.8rem;
+            right: 0.8rem;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.4rem 0.9rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            z-index: 10;
+        }
+
+        .copy-btn-enhanced:hover {
+            background: rgba(118, 75, 162, 0.9);
+            transform: scale(1.05);
+        }
+
+        /* Simple code block without label */
+        .simple-code-block {
+            position: relative;
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+
+        .simple-code-block pre {
+            margin: 0;
+        }
+
+        .simple-code-block code {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div data-include="header"></div>
+
+    <div class="breadcrumb">
+        <a href="../">Home</a>
+        <span>/</span>
+        <a href="../#docs">Documentation</a>
+        <span>/</span>
+        <span>Quick Start</span>
+    </div>
+
+    <div class="container">
+        <div class="content-section">
+            <h1>🚀 Quick Start Guide</h1>
+            <p>
+                Welcome to MOF DB! This guide will help you get started with accessing and using our MOF datasets.
+            </p>
+
+            <h2>Step 1: Download the Dataset</h2>
+            
+            <div class="info-box">
+                <h4>📦 Dataset Usage</h4>
+                <ul style="margin: 0.5rem 0 0 0;">
+                    <li>
+                        <strong>H2MOF-ML Dataset (JSON)</strong>: <span style="color: #007bff;">🎯 Use for model training</span> — Contains GCMC simulation values (labels) for hydrogen adsorption, enabling supervised learning.
+                    </li>
+                    <li>
+                        <strong>hMOF-ML Dataset (JSON)</strong>: <span style="color: #ffc107;">🎯 Use for prediction</span> — Apply trained models to predict properties on 137,953 hypothetical MOF structures for large-scale screening.
+                    </li>
+                </ul>
+                <div style="background: #f0f7ff; padding: 1rem; border-radius: 6px; margin-top: 1rem; border-left: 3px solid #667eea;">
+                    <strong>💡 Workflow Tip:</strong> Train your model on H2MOF-ML, then use it to make predictions on hMOF-ML for high-throughput screening.
+                </div>
+            </div>
+            
+            <p>You can download datasets in two ways:</p>
+            
+            <h3>Option A: Web Interface</h3>
+            <ol>
+                <li>Open the dataset page in your browser</li>
+                <li>
+                    <span></span>
+                    <a href="https://huggingface.co/datasets/ytbai/H2MOF-ML/blob/main/H2MOF-ML.json" target="_blank">H2MOF-ML Dataset</a>
+                    <span></span>
+                    <a href="https://huggingface.co/datasets/ytbai/hMOF-ML/blob/main/hMOF-ML.json" target="_blank">hMOF-ML Dataset</a>
+                    <span> to visit the Hugging Face dataset link.</span>
+                </li>
+                <li>Click the download button on the page</li>
+                <li>Save the JSON file to your computer</li>
+            </ol>
+
+            <h3>Option B: API Access</h3>
+            <p>
+                Use the following Python script to fetch the JSON directly from Hugging Face into your current working directory. Choose the appropriate script based on which dataset you need:
+            </p>
+            
+            <div class="code-section">
+                <span class="code-label">download_h2mof.py</span>
+                <div class="enhanced-code-block">
+                    <button class="copy-btn-enhanced" data-target="download-gcmc-script">Copy</button>
+                    <pre id="download-gcmc-script"><code><span style="color: #75715e"># Download H2MOF-ML Dataset</span>
+<span style="color: #f92672">from</span> pathlib <span style="color: #f92672">import</span> Path
+<span style="color: #f92672">from</span> huggingface_hub <span style="color: #f92672">import</span> hf_hub_download
+
+current_dir = Path.cwd()
+
+file_path = hf_hub_download(
+    repo_id=<span style="color: #e6db74">"ytbai/H2MOF-ML"</span>,
+    filename=<span style="color: #e6db74">"H2MOF-ML.json"</span>,
+    repo_type=<span style="color: #e6db74">"dataset"</span>,
+    local_dir=<span style="color: #66d9ef">str</span>(current_dir),
+    local_dir_use_symlinks=<span style="color: #66d9ef">False</span>,
+)
+
+<span style="color: #66d9ef">print</span>(<span style="color: #e6db74">"Saved at:"</span>, file_path)</code></pre>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <span class="code-label">download_hmof.py</span>
+                <div class="enhanced-code-block">
+                    <button class="copy-btn-enhanced" data-target="download-hmof-script">Copy</button>
+                    <pre id="download-hmof-script"><code><span style="color: #75715e"># Download hMOF-ML Dataset</span>
+<span style="color: #f92672">from</span> pathlib <span style="color: #f92672">import</span> Path
+<span style="color: #f92672">from</span> huggingface_hub <span style="color: #f92672">import</span> hf_hub_download
+
+current_dir = Path.cwd()
+
+file_path = hf_hub_download(
+    repo_id=<span style="color: #e6db74">"ytbai/hMOF-ML"</span>,
+    filename=<span style="color: #e6db74">"hMOF-ML.json"</span>,
+    repo_type=<span style="color: #e6db74">"dataset"</span>,
+    local_dir=<span style="color: #66d9ef">str</span>(current_dir),
+    local_dir_use_symlinks=<span style="color: #66d9ef">False</span>,
+)
+
+<span style="color: #66d9ef">print</span>(<span style="color: #e6db74">"Saved at:"</span>, file_path)</code></pre>
+                </div>
+            </div>
+            
+            <p>
+                Run the corresponding script (e.g., <code>python download_h2mof.py</code> or <code>python download_hmof.py</code>) and the dataset will be saved where you execute the script.
+            </p>
+
+            <h2>Step 2: Load and Explore the Data</h2>
+            <p>
+                Use Python to load the JSON file and access samples with convenient dot notation, similar to the <code>explore.py</code> helper shown below:
+            </p>
+            
+            <div class="code-section">
+                <span class="code-label">explore.py</span>
+                <div class="enhanced-code-block">
+                    <button class="copy-btn-enhanced" data-target="explore-script">Copy</button>
+                    <pre id="explore-script"><code><span style="color: #f92672">import</span> json
+<span style="color: #f92672">import</span> logging
+<span style="color: #f92672">import</span> os
+<span style="color: #f92672">from</span> types <span style="color: #f92672">import</span> SimpleNamespace
+
+logging.basicConfig(level=logging.DEBUG, format=<span style="color: #e6db74">'%(asctime)s - %(levelname)s - %(message)s'</span>)
+logger = logging.getLogger(__name__)
+logger.disabled = <span style="color: #66d9ef">True</span>
+
+<span style="color: #f92672">def</span> <span style="color: #a6e22e">dict_to_namespace</span>(d):
+    <span style="color: #e6db74">"""Convert a dictionary to dot-notation objects"""</span>
+    <span style="color: #f92672">if</span> isinstance(d, dict):
+        <span style="color: #f92672">return</span> SimpleNamespace(**{k: dict_to_namespace(v) <span style="color: #f92672">for</span> k, v <span style="color: #f92672">in</span> d.items()})
+    <span style="color: #f92672">elif</span> isinstance(d, list):
+        <span style="color: #f92672">return</span> [dict_to_namespace(item) <span style="color: #f92672">for</span> item <span style="color: #f92672">in</span> d]
+    <span style="color: #f92672">return</span> d
+
+<span style="color: #f92672">def</span> <span style="color: #a6e22e">load_json_samples</span>(json_file):
+    <span style="color: #f92672">if</span> <span style="color: #f92672">not</span> os.path.exists(json_file):
+        <span style="color: #f92672">raise</span> FileNotFoundError(<span style="color: #e6db74">f"JSON file not found: </span><span style="color: #e6db74">{json_file}</span><span style="color: #e6db74">"</span>)
+
+    <span style="color: #f92672">with</span> <span style="color: #66d9ef">open</span>(json_file, <span style="color: #e6db74">'r'</span>, encoding=<span style="color: #e6db74">'utf-8'</span>) <span style="color: #f92672">as</span> f:
+        json_data = json.load(f)
+
+    samples = {}
+    <span style="color: #f92672">for</span> sample_name, sample_data <span style="color: #f92672">in</span> json_data.items():
+        samples[sample_name] = dict_to_namespace(sample_data)
+    <span style="color: #f92672">return</span> samples
+
+json_file = <span style="color: #e6db74">"H2MOF-ML.json"</span>
+samples = load_json_samples(json_file)
+
+sample_name = <span style="color: #e6db74">"ABEXOW"</span>
+<span style="color: #66d9ef">print</span>(samples[sample_name].lattice.abc)
+<span style="color: #66d9ef">print</span>(samples[sample_name].properties.metal_composition.total_metal_atoms)
+<span style="color: #66d9ef">print</span>(samples[sample_name].properties.UV_at_TPS)
+
+<span style="color: #75715e"># Example output</span>
+<span style="color: #75715e"># [12.002, 11.008, 19.473]</span>
+<span style="color: #75715e"># 7</span>
+<span style="color: #75715e"># 23.96</span></code></pre>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>💡 Tip</h4>
+                <p>
+                    The loading method is the same for both datasets - simply replace the file path with the corresponding dataset filename. For detailed attribute descriptions and available properties, please refer to the <a href="data-format.html">Data Format</a> documentation.
+                </p>
+            </div>
+
+            <h2>Next Steps</h2>
+            <ul>
+                <li>Explore the <a href="data-format.html">Data Format</a> documentation for detailed field descriptions</li>
+            </ul>
+        </div>
+    </div>
+
+    <div data-include="footer"></div>
+
+    <script src="../script.js"></script>
+    <script>
+        // Override updateContent to support innerHTML for elements with HTML tags
+        function initUpdateContent() {
+            // Override updateContent function
+            if (typeof window.updateContent === 'function') {
+                const originalUpdateContent = window.updateContent;
+                window.updateContent = function() {
+                    const elements = document.querySelectorAll('[data-en][data-zh]');
+                    elements.forEach(el => {
+                        const text = currentLang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
+                        // Check if the text contains HTML tags
+                        if (text && (text.includes('<a') || text.includes('<code') || text.includes('<'))) {
+                            el.innerHTML = text;
+                        } else {
+                            el.textContent = text;
+                        }
+                    });
+                };
+            }
+        }
+        
+        // Wait for script.js to load and then override
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(initUpdateContent, 50);
+            });
+        } else {
+            setTimeout(initUpdateContent, 50);
+        }
+
+        // Enhanced copy button functionality
+        document.querySelectorAll('.copy-btn-enhanced').forEach(button => {
+            button.addEventListener('click', async () => {
+                const targetId = button.dataset.target;
+                const codeBlock = document.getElementById(targetId);
+                if (!codeBlock) return;
+
+                const codeText = codeBlock.innerText.trim();
+
+                try {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(codeText);
+                    } else {
+                        const textarea = document.createElement('textarea');
+                        textarea.value = codeText;
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textarea);
+                    }
+
+                    const originalText = button.textContent;
+                    button.textContent = '✓ Copied!';
+                    button.style.background = 'rgba(76, 175, 80, 0.9)';
+                    
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = 'rgba(102, 126, 234, 0.9)';
+                    }, 2000);
+                } catch (error) {
+                    console.error('Copy failed', error);
+                    button.textContent = '✗ Error';
+                    setTimeout(() => {
+                        button.textContent = 'Copy';
+                    }, 2000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

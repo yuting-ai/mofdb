@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Format - MOF DB</title>
+    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* Fix table width consistency and word wrapping */
+        .data-table {
+            table-layout: fixed;
+            width: 100%;
+        }
+        
+        /* Attribute Path column - allow wrapping */
+        .data-table th:first-child,
+        .data-table td:first-child {
+            width: 25%;
+            word-wrap: break-word;
+            word-break: break-all;
+            overflow-wrap: break-word;
+        }
+        
+        /* Description column */
+        .data-table th:nth-child(2),
+        .data-table td:nth-child(2) {
+            width: 25%;
+            word-wrap: break-word;
+        }
+        
+        /* Type column */
+        .data-table th:nth-child(3),
+        .data-table td:nth-child(3) {
+            width: 12%;
+        }
+        
+        /* Example column */
+        .data-table th:nth-child(4),
+        .data-table td:nth-child(4) {
+            width: 18%;
+            word-wrap: break-word;
+        }
+        
+        /* Checkmark columns */
+        .data-table th:nth-child(5),
+        .data-table td:nth-child(5),
+        .data-table th:nth-child(6),
+        .data-table td:nth-child(6) {
+            width: 10%;
+            text-align: center;
+        }
+        
+        /* Allow code tags to wrap */
+        .data-table code {
+            white-space: normal;
+            word-break: break-all;
+            display: inline-block;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div data-include="header"></div>
+
+    <div class="breadcrumb">
+        <a href="../">Home</a>
+        <span>/</span>
+        <a href="../#docs">Documentation</a>
+        <span>/</span>
+        <span>Data Format</span>
+    </div>
+
+    <div class="container">
+        <div class="content-section">
+            <h1>📋 Data Format Specification</h1>
+            <p>
+                This document describes the JSON data format and all attributes accessible via dot notation for MOF DB datasets. Each sample (e.g., <code>samples["LUFCAS"]</code>) contains top-level fields and a <code>properties</code> field, both of which are converted to <code>SimpleNamespace</code> objects (shown as <code>Object</code> in the type column) to support dot notation. The attributes are divided into two categories: top-level fields and properties fields.
+            </p>
+
+            <h2>Top-Level Fields</h2>
+            <p>
+                The following table lists the top-level fields for each sample, accessible via dot notation (e.g., <code>sample.lattice.abc</code>).
+            </p>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Attribute Path</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Example</th>
+                        <th scope="col">H2MOF-ML</th>
+                        <th scope="col">hMOF-ML</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>sample.lattice</code></td>
+                        <td>Lattice information</td>
+                        <td>Object</td>
+                        <td>&lt;Object&gt;</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.lattice.abc</code></td>
+                        <td>Lattice edge lengths</td>
+                        <td>List[float]</td>
+                        <td>[15.629, 15.991, 9.2343]</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.lattice.angles</code></td>
+                        <td>Lattice angles</td>
+                        <td>List[float]</td>
+                        <td>[90, 102.774, 90]</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.lattice.volume</code></td>
+                        <td>Lattice volume</td>
+                        <td>float</td>
+                        <td>1234.56</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.lattice.matrix</code></td>
+                        <td>Lattice matrix</td>
+                        <td>List[List[float]]</td>
+                        <td>[[15.629, 0, 0], [0, 15.991, 0], [-1.234, 0, 9.123]]</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.sites</code></td>
+                        <td>List of atomic sites</td>
+                        <td>List[Object]</td>
+                        <td>[&lt;Object&gt;, ...]</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.sites[i].label</code></td>
+                        <td>Atom label</td>
+                        <td>str</td>
+                        <td>"C1"</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.sites[i].species</code></td>
+                        <td>Atom species</td>
+                        <td>str</td>
+                        <td>"C"</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.sites[i].frac_coords</code></td>
+                        <td>Fractional coordinates</td>
+                        <td>List[float]</td>
+                        <td>[0.123, 0.456, 0.789]</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.sites[i].cartesian_coords</code></td>
+                        <td>Cartesian coordinates</td>
+                        <td>List[float]</td>
+                        <td>[1.234, 5.678, 9.012]</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.edge_index</code></td>
+                        <td>Edge indices</td>
+                        <td>List[List[int]]</td>
+                        <td>[[0, 1], [1, 0]]</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.edge_attr</code></td>
+                        <td>List of edge attributes</td>
+                        <td>List[Object]</td>
+                        <td>[&lt;Object&gt;, ...]</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.edge_attr[i].symmetry1</code></td>
+                        <td>Symmetry operation for first atom</td>
+                        <td>str</td>
+                        <td>"1_555"</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.edge_attr[i].symmetry2</code></td>
+                        <td>Symmetry operation for second atom</td>
+                        <td>str</td>
+                        <td>"1_555"</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.edge_attr[i].distance</code></td>
+                        <td>Edge distance</td>
+                        <td>float</td>
+                        <td>1.54</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.name</code></td>
+                        <td>Sample name</td>
+                        <td>str</td>
+                        <td>"LUFCAS"</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties</code></td>
+                        <td>Crystal properties</td>
+                        <td>Object</td>
+                        <td>&lt;Object&gt;</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Properties Fields</h2>
+            <p>
+                The following table lists the attributes within the <code>properties</code> field for each sample, accessible via <code>sample.properties.&lt;attribute_name&gt;</code>.
+            </p>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Attribute Path</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Example</th>
+                        <th scope="col">H2MOF-ML</th>
+                        <th scope="col">hMOF-ML</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>sample.properties.GSA</code></td>
+                        <td>Gravimetric surface area (m²/g)</td>
+                        <td>float/None</td>
+                        <td>2500.0</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.VSA</code></td>
+                        <td>Volumetric surface area (m²/cm³)</td>
+                        <td>float/None</td>
+                        <td>1500.0</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.VF</code></td>
+                        <td>Void fraction</td>
+                        <td>float/None</td>
+                        <td>0.85</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.LCD</code></td>
+                        <td>Largest cavity diameter (Å)</td>
+                        <td>float/None</td>
+                        <td>10.5</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.PLD</code></td>
+                        <td>Pore limiting diameter (Å)</td>
+                        <td>float/None</td>
+                        <td>4.8</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.crystal_density</code></td>
+                        <td>Crystal density (g/cm³)</td>
+                        <td>float/None</td>
+                        <td>1.85</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.chemical_formula_moiety</code></td>
+                        <td>Chemical formula</td>
+                        <td>str</td>
+                        <td>"C24 H24 Cu2"</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.space_group_name</code></td>
+                        <td>Space group name</td>
+                        <td>str/None</td>
+                        <td>"P2_1/c"</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.space_group_number</code></td>
+                        <td>Space group number</td>
+                        <td>float/None</td>
+                        <td>14</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.formula_units_z</code></td>
+                        <td>Number of formula units</td>
+                        <td>float/None</td>
+                        <td>4</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.symmetry_cell_setting</code></td>
+                        <td>Crystal system</td>
+                        <td>str/None</td>
+                        <td>"monoclinic"</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.exptl_crystal_colour</code></td>
+                        <td>Crystal color</td>
+                        <td>str/None</td>
+                        <td>"blue"</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.exptl_crystal_description</code></td>
+                        <td>Crystal description</td>
+                        <td>str/None</td>
+                        <td>"block"</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.diffrn_ambient_temperature</code></td>
+                        <td>Measurement temperature (K)</td>
+                        <td>float/None</td>
+                        <td>293.0</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.refine_ls_R_factor_gt</code></td>
+                        <td>R-factor</td>
+                        <td>float/None</td>
+                        <td>0.045</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.UG_at_PS</code></td>
+                        <td>UG value from PS data</td>
+                        <td>float/None</td>
+                        <td>0.75</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.UV_at_PS</code></td>
+                        <td>UV value from PS data</td>
+                        <td>float/None</td>
+                        <td>0.82</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.UG_at_TPS</code></td>
+                        <td>UG value from TPS data</td>
+                        <td>float/None</td>
+                        <td>0.78</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.UV_at_TPS</code></td>
+                        <td>UV value from TPS data</td>
+                        <td>float/None</td>
+                        <td>0.85</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.metal_composition</code></td>
+                        <td>Metal composition details</td>
+                        <td>Object</td>
+                        <td>&lt;Object&gt;</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.metal_composition.total_metal_atoms</code></td>
+                        <td>Total number of metal atoms</td>
+                        <td>float</td>
+                        <td>2</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.metal_composition.total_metal_mass_fraction</code></td>
+                        <td>Mass fraction of metal atoms</td>
+                        <td>float</td>
+                        <td>0.35</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                    <tr>
+                        <td><code>sample.properties.metal_composition.total_metal_molar_fraction</code></td>
+                        <td>Molar fraction of metal atoms</td>
+                        <td>float</td>
+                        <td>0.1</td>
+                        <td style="text-align: center;">✓</td>
+                        <td style="text-align: center;">✓</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div data-include="footer"></div>
+
+    <script src="../script.js"></script>
+    <script>
+        // Override updateContent to support innerHTML for elements with HTML tags
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for script.js to load
+            setTimeout(function() {
+                const originalUpdateContent = window.updateContent;
+                if (originalUpdateContent) {
+                    window.updateContent = function() {
+                        const elements = document.querySelectorAll('[data-en][data-zh]');
+                        elements.forEach(el => {
+                            const text = currentLang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-zh');
+                            // Check if the text contains HTML tags
+                            if (text && text.includes('<')) {
+                                el.innerHTML = text;
+                            } else {
+                                el.textContent = text;
+                            }
+                        });
+                    };
+                    // Call updateContent once to ensure initial state is correct
+                    if (typeof currentLang !== 'undefined') {
+                        window.updateContent();
+                    }
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>

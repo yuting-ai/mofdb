@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hMOF-ML Dataset - MOF DB</title>
+    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div data-include="header"></div>
+
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <a href="../index.html#datasets">Datasets</a>
+        <span>/</span>
+        <span>hMOF-ML Dataset</span>
+    </div>
+
+    <div class="container">
+        <div class="content-section">
+            <!-- Header Section -->
+            <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                <div style="font-size: 4rem;">🗄️</div>
+                <div>
+                    <h1 style="margin: 0;">hMOF-ML Dataset</h1>
+                    <p style="margin: 0.5rem 0 0 0; color: #666;">Version v1.0 | ML-Ready Dataset for High-Throughput Screening</p>
+                </div>
+            </div>
+
+            <!-- Overview Box -->
+            <div class="info-box">
+                <h4>📊 Dataset Overview</h4>
+                <p>A massive, machine learning-ready dataset of 137,953 hypothetical MOF structures with comprehensive structural and geometric features. This dataset enables high-throughput computational screening, material discovery, and gas adsorption prediction for various applications. Note: This dataset does not include hydrogen storage labels and is primarily designed for inference and candidate screening tasks.</p>
+            </div>
+
+            <!-- Key Statistics -->
+            <h2>Key Statistics</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+                <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: bold; color: #667eea;">137,953</div>
+                    <div style="color: #666; margin-top: 0.5rem;">Hypothetical MOFs</div>
+                </div>
+                <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: bold; color: #667eea;">102</div>
+                    <div style="color: #666; margin-top: 0.5rem;">Building Blocks</div>
+                </div>
+                <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: bold; color: #667eea;">HT</div>
+                    <div style="color: #666; margin-top: 0.5rem;">Screening Ready</div>
+                </div>
+                <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: bold; color: #667eea;">JSON</div>
+                    <div style="color: #666; margin-top: 0.5rem;">ML-Ready Format</div>
+                </div>
+            </div>
+
+            <!-- Data Sources Section -->
+            <h2>📊 Data Sources</h2>
+            
+            <h3>🧱 Structural Data</h3>
+                    <p><span>From </span><a href="https://mof.tech.northwestern.edu/databases" target="_blank">Northwestern University databases</a><span> containing 137,953 hypothetically constructed MOF CIF files assembled from 102 building blocks. The hMOF-ML Database was originally developed by Christopher E. Wilmer and collaborators and is now curated by the Snurr Research Lab.</span></p>
+            
+            <h3>🔬 Geometric Features</h3>
+            <p><span>From </span><a href="https://mof.tech.northwestern.edu/" target="_blank">MOFXDB API</a><span> including original geometric descriptors:</span></p>
+            <ul>
+                <li><strong>GSA</strong><span> — Gravimetric Surface Area (m²/g)</span></li>
+                <li><strong>VSA</strong><span> — Volumetric Surface Area (m²/cm³)</span></li>
+                <li><strong>VF</strong><span> — Void Fraction</span></li>
+                <li><strong>LCD</strong><span> — Largest Cavity Diameter (Å)</span></li>
+                <li><strong>PLD</strong><span> — Pore Limiting Diameter (Å)</span></li>
+            </ul>
+
+            <!-- Processing Pipeline Section -->
+            <h2>🔧 Data Processing Pipeline</h2>
+            <p>We performed comprehensive processing to transform raw hMOF-ML data into a ML-ready format:</p>
+            
+            <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid #667eea;">
+                <h4 style="margin: 0 0 0.75rem 0; color: #333;">⭐ <span>1. Automated Structure Data Extraction</span></h4>
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8;">
+                    <li>Developed Pymatgen-based Python automation scripts</li>
+                    <li>Automatic CIF parsing from Northwestern databases</li>
+                    <li>Parsed and extracted: unit cell parameters (a, b, c, α, β, γ), atomic types and coordinates</li>
+                </ul>
+            </div>
+
+            <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid #667eea;">
+                <h4 style="margin: 0 0 0.75rem 0; color: #333;">⭐ <span>2. Derived Feature Calculation</span></h4>
+                <p style="margin: 0 0 0.5rem 0; line-height: 1.6;">Computed additional features to enrich the feature space:</p>
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8;">
+                    <li>Total metal atom count</li>
+                    <li>Metal mass fraction</li>
+                    <li>Metal molar fraction</li>
+                    <li>Lattice volume</li>
+                </ul>
+            </div>
+
+            <div style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid #667eea;">
+                <h4 style="margin: 0 0 0.75rem 0; color: #333;">⭐ <span>3. Data Integration & Standardization</span></h4>
+                <p style="margin: 0 0 0.5rem 0; line-height: 1.6;">Unified JSON database containing:</p>
+                <ul style="margin: 0; padding-left: 1.5rem; line-height: 1.8;">
+                    <li>Atomic composition features</li>
+                    <li>Lattice parameter features</li>
+                    <li>Pore geometry features</li>
+                </ul>
+            </div>
+
+            <p style="margin-top: 1.5rem;"><span>For a complete list of all accessible attributes and their descriptions, please refer to the </span><a href="data-format.html">Data Format</a><span> documentation.</span></p>
+
+            <!-- Applications Section -->
+            <h2>🎯 Applications</h2>
+            <ul>
+                <li><strong>Machine Learning Inference:</strong><span> Direct use for model inference to predict various gas adsorption properties</span></li>
+                <li><strong>High-Throughput Screening:</strong><span> Screen high-performance MOF candidates for specific applications</span></li>
+                <li><strong>Gas Adsorption Prediction:</strong><span> Predict adsorption behavior for various gases (H₂, CH₄, CO₂, etc.)</span></li>
+                <li><strong>Material Discovery:</strong><span> Discover novel MOF structures with optimized properties</span></li>
+                <li><strong>Comparative Studies:</strong><span> Compare hypothetical structures against experimental MOFs</span></li>
+            </ul>
+
+            <!-- Key Advantages Section -->
+            <h2>💡 Key Advantages</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div style="background: #d4edda; padding: 1rem; border-radius: 8px; border-left: 4px solid #28a745;">
+                    <strong>✅ ML-Ready</strong>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Structured JSON format with comprehensive features, ready for direct model inference</p>
+                </div>
+                <div style="background: #cce5ff; padding: 1rem; border-radius: 8px; border-left: 4px solid #007bff;">
+                    <strong>📊 Feature-Rich</strong>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Comprehensive structural and geometric features</p>
+                </div>
+                <div style="background: #f8d7da; padding: 1rem; border-radius: 8px; border-left: 4px solid #dc3545;">
+                    <strong>🔬 Massive Scale</strong>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">137,953 hypothetical structures for comprehensive screening</p>
+                </div>
+                <div style="background: #e7e7ff; padding: 1rem; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <strong>🎯 Ready-to-Use</strong>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Unified format optimized for inference tasks</p>
+                </div>
+            </div>
+
+            <!-- Important Note -->
+            <div class="info-box" style="background: #fff3cd; border-left: 4px solid #ffc107;">
+                <h4 style="margin-top: 0;">⚠️ Important Note</h4>
+                <p style="margin: 0;">This dataset does NOT include hydrogen storage labels (UG_at_PS, UV_at_PS, UG_at_TPS, UV_at_TPS). It is primarily designed for inference tasks and candidate screening. For training models on hydrogen storage prediction, please use the H2MOF-ML Dataset.</p>
+            </div>
+
+            <!-- Download Section -->
+            <h2>Download</h2>
+            <p>The dataset is available in JSON format. You can download it via:</p>
+            <ul>
+                <li>
+                    <span>Browser: Visit the </span>
+                    <a href="https://huggingface.co/datasets/ytbai/hMOF-ML/blob/main/hMOF-ML.json" target="_blank">Hugging Face dataset page</a>
+                </li>
+                <li>
+                    <span>Python: Use the download script from </span>
+                    <a href="quick-start.html">Quick Start guide</a>
+                </li>
+            </ul>
+
+            <!-- Citation Section -->
+            <h2>📚 Citation</h2>
+            <p>If you use this dataset, please cite the following references:</p>
+            
+            <div class="info-box" style="margin-top: 1rem;">
+                <h4>Recent Curation (2023)</h4>
+                <p style="margin: 0; font-family: 'Times New Roman', serif; line-height: 1.6;">
+                    N. Scott Bobbitt, Kaihang Shi, Benjamin J. Bucior, Haoyuan Chen, Nathaniel Tracy-Amoroso, Zhao Li, Yangzesheng Sun, Julia H. Merlin, J. Ilja Siepmann, Daniel W. Siderius, and Randall Q. Snurr.<br>
+                    <em>MOFX-DB: An Online Database of Computational Adsorption Data for Nanoporous Materials.</em><br>
+                    <span>Journal of Chemical & Engineering Data</span><span>, 2023, 68 (2), 483–498.</span><br>
+                    DOI: <a href="https://doi.org/10.1021/acs.jced.2c00583" target="_blank">10.1021/acs.jced.2c00583</a>
+                </p>
+            </div>
+
+            <div class="info-box" style="margin-top: 1rem;">
+                <h4>Foundational Generation Study (2012)</h4>
+                <p style="margin: 0; font-family: 'Times New Roman', serif; line-height: 1.6;">
+                    Christopher E. Wilmer, Michael Leaf, Chang Yeon Lee, Omar K. Farha, Brad G. Hauser, Joseph T. Hupp, and Randall Q. Snurr.<br>
+                    <em>Large-scale screening of hypothetical metal–organic frameworks.</em><br>
+                    <span>Nature Chemistry</span><span>, 2012, 4, 83–89.</span><br>
+                    DOI: <a href="https://doi.org/10.1038/nchem.1192" target="_blank">10.1038/nchem.1192</a>
+                </p>
+            </div>
+
+            <!-- Related Datasets -->
+            <div class="info-box" style="background: #e7f3ff; border-left: 4px solid #007bff; margin-top: 2rem;">
+                <h4 style="margin-top: 0;">🔗 Related Dataset</h4>
+                <p style="margin: 0.5rem 0;"><span>For training machine learning models on hydrogen storage prediction with labeled GCMC data, see: </span><a href="h2mof-ml.html">H2MOF-ML Dataset</a></p>
+            </div>
+
+            <!-- Related Documentation -->
+            <div class="info-box" style="margin-top: 2rem;">
+                <h4>📚 Related Documentation</h4>
+                <ul style="margin: 0.5rem 0 0 0;">
+                    <li><a href="quick-start.html">Quick Start Guide - Learn how to load and use the dataset</a></li>
+                    <li><a href="data-format.html">Data Format Specification - Complete attribute reference</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div data-include="footer"></div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
